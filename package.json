@@ -1,13 +1,13 @@
 {
-  "name": "form-validation",
+  "name": "todo",
   "version": "1.0.0",
-  "description": "Accept and validate form data using body-parser middleware",
+  "description": "my todo list",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "body-parse"
+    "todo"
   ],
   "author": "",
   "license": "ISC",
@@ -16,6 +16,9 @@
     "express": "^4.15.3",
     "express-validator": "^3.2.0",
     "mustache": "^2.3.0",
-    "node": "0.0.0"
+    "mustache-express": "^1.2.5",
+    "node": "0.0.0",
+    "pg": "^6.4.0",
+    "sequelize": "^4.2.0"
   }
 }
