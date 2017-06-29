@@ -2,26 +2,11 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
 const mustacheExpress = require('mustache-express');
+const path = require('path');
+const models = require('./models');
 
-var app = express();
-const todoList = [];
+const app = express();
 
-app.engine('mustache', mustacheExpress());
-
-// const data = { todos: [
-//   {
-//     task: 'walk the dog',
-//     status: false
-//   },
-//   {
-//     task: 'clean house',
-//     status: false
-//   },
-//   {
-//     task: 'wash the car',
-//     status: false
-//   }
-// ]}
 app.engine('mustache', mustacheExpress());
 app.set('views', './views');
 app.set('view engine', 'mustache');
@@ -31,29 +16,23 @@ app.use(expressValidator());
 app.use(express.static('./public'));
 
 app.get('/', function(req, res){
-  res.render('index', {todoList: todoList});
-  console.log(todoList);
+  models.task.findAll().then(function(tasks){
+
+  res.render('index',{task: tasks})
+    })
 });
 
 app.post('/', function(req, res){
 
-    req.checkBody("item", "You must enter a new task!").notEmpty();
+  const task = models.task.build({
+    task: req.body.task,
+    // iscompleted: req.body.iscompleted
+  }).save().then(() => {});
+    res.redirect('/');
+});
 
-    let errors = req.validationErrors();
 
-    if (errors) {
-    res.render('index', {errors: errors});
-    } else {
-      let todo = {
-        'item': req.body.item,
-        'checked': ""
-      };
-        todoList.push(todo);
-        console.log(todo);
-        res.render('index', {todoList: todoList});
-    }
 
-  });
 
 
   app.listen(3000, function(){

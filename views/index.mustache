@@ -6,16 +6,16 @@
   </head>
   <body>
     <div class="wrapper">
-      <form id="to-do" action="/" method="post">
+      <form active="/" method="post">
         <input type="text" name="item" placeholder="Enter a task">
         <button type="submit" name="button">Submit</button>
       </form>
     <div class="todos">
       <h1>todo</h1>
       <ul>
-      {{#todoList}}{{^errors}}
+      {{#tasks}}
       <li><input type="checkbox" {{checked}}>  {{item}}</li>
-      {{/errors}}{{/todoList}}
+      {{/tasks}}
     </ul>
     </div>
 
